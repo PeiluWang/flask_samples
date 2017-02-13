@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>test</title>
+    <script src="jquery-3.0.0.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+    <script type="text/javascript">
+      // common variable
+      var HOST_URL="http://127.0.0.1:5001";
+      var TOKEN="3dab66d89be7796b3d37bc21e931933b";
+	  
+	  function testPost(postUrl, postData){
+		alert("test url: "+postUrl+"\ntest data: "+JSON.stringify(postData));
+		var postStr=JSON.stringify(postData);
+	    $.ajax({
+              url: postUrl,
+              data: postStr,
+              contentType: 'application/json',
+              type: 'post',
+              success:function(result){
+                var result=JSON.stringify(result);
+                alert(result);
+              },
+              error:function(result){
+                alert("error");
+                var result=JSON.stringify(result);
+                alert(result);
+              }
+             });
+	  }
+    </script>
+  </head>
+  <body>
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+
+        <h3>Test POST interface</h3>
+        <p>POST: /test_post</p>
+        <input class="btn btn-default" type="button" value="test" onclick="test_post()">
+        <script type="text/javascript">
+        function test_post(){
+		  var postUrl=HOST_URL+"/test_post";
+          var postData={"token":TOKEN};
+		  testPost(postUrl, postData);
+		  }
+        </script>
+      </div>
+    </div>
+
+  </body>
+</html>
